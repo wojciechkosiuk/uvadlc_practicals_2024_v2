@@ -114,7 +114,7 @@ class CausalSelfAttention(nn.Module):
         """
         # Generate RoPE embeddings dynamically based on T
         seq_pos = torch.arange(T, device=xq.device) # Shape: (T)
-        freqs = torch.einsum("i,j->ij", seq_pos, self.inv_freq)  # Shape: (T, dim // 2)
+        freqs = torch.einsum("i,j->ij", seq_pos, self.inv_freq.to(xq.device))  # Shape: (T, dim // 2)
         # pos_emb = torch.cat([torch.sin(freqs), torch.cos(freqs)], dim=-1)
         # pos_emb = pos_emb.unsqueeze(0).unsqueeze(0)
 
