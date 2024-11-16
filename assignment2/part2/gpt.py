@@ -113,20 +113,35 @@ class CausalSelfAttention(nn.Module):
             Tuple[torch.Tensor, torch.Tensor]: Tuple containing the modified query and key tensors.
         """
         # Generate RoPE embeddings dynamically based on T
-        seq_pos = torch.arange(T, device=xq.device).float()  # Shape: (T)
+        seq_pos = torch.arange(T, device=xq.device) # Shape: (T)
         freqs = torch.einsum("i,j->ij", seq_pos, self.inv_freq)  # Shape: (T, dim // 2)
-        pos_emb = torch.cat((freqs.sin(), freqs.cos()), dim=-1).unsqueeze(0).unsqueeze(0)  # Shape: (1, 1, T, dim)
+        # pos_emb = torch.cat([torch.sin(freqs), torch.cos(freqs)], dim=-1)
+        # pos_emb = pos_emb.unsqueeze(0).unsqueeze(0)
 
-        # Split pos into sin and cos components, repeating each to match xq and xk dimensions
-        pos_sin = pos_emb[..., ::2].repeat(1, 1, 1, 2)
-        pos_cos = pos_emb[..., 1::2].repeat(1, 1, 1, 2)
+        # # Split pos into sin and cos components, repeating each to match xq and xk dimensions
+        # pos_sin = pos_emb[..., :xq.size(-1) // 2]
+        # pos_cos = pos_emb[..., xq.size(-1) // 2:]
+        # pos_sin = torch.cat([pos_sin, pos_sin], dim=-1)
+        # pos_cos = torch.cat([pos_cos, pos_cos], dim=-1) 
         
-        # Apply RoPE transformation: pair and rotate dimensions
-        # Rotate query and key tensors
-        xq_rot = (xq * pos_cos) + (torch.cat((-xq[..., 1::2], xq[..., ::2]), dim=-1) * pos_sin)
-        xk_rot = (xk * pos_cos) + (torch.cat((-xk[..., 1::2], xk[..., ::2]), dim=-1) * pos_sin)
-        # raise NotImplementedError
+        # # Apply RoPE transformation: pair and rotate dimensions
+        # # Rotate query and key tensors
+        # xq_rot = (xq * pos_cos) + (torch.cat([-xq[..., 1::2], xq[..., ::2]], dim=-1) * pos_sin)
+        # xk_rot = (xk * pos_cos) + (torch.cat([-xk[..., 1::2], xk[..., ::2]], dim=-1) * pos_sin)
         
+        sin_emb = torch.sin(freqs).unsqueeze(0).unsqueeze(0)  # Shape: (1, 1, T, head_dim // 2)
+        cos_emb = torch.cos(freqs).unsqueeze(0).unsqueeze(0)  # Shape: (1, 1, T, head_dim // 2)
+        
+        # Step 4: Expand sin and cos embeddings to match the dimensions of xq and xk
+        sin_emb = torch.cat([sin_emb, sin_emb], dim=-1)  # Shape: (1, 1, T, head_dim)
+        cos_emb = torch.cat([cos_emb, cos_emb], dim=-1)  # Shape: (1, 1, T, head_dim)
+        
+        # Step 5: Apply rotary transformation to each pair of dimensions
+        xq1 = torch.cat([-xq[..., 1::2], xq[..., ::2]], dim=-1)  # Shape: (B, nh, T, head_dim)
+        xk1 = torch.cat([-xk[..., 1::2], xk[..., ::2]], dim=-1)  # Shape: (B, nh, T, head_dim)
+        xq_rot = (xq * cos_emb) + (xq1 * sin_emb)
+        xk_rot = (xk * cos_emb) + (xk1 * sin_emb)       
+
         return xq_rot, xk_rot
         
     def forward(self, x):
@@ -426,7 +441,7 @@ class GPT(nn.Module):
         return logits
 
     @torch.inference_mode()
-    def generate(self, idx: torch.LongTensor, max_new_tokens: int, temperature:float = 1.0, do_sample:bool = False, top_k:int = None, top_p: float = 0.6):
+    def generate(self, idx: torch.LongTensor, max_new_tokens: int, temperature:float = 1.0, do_sample:bool = False, top_k:int = None, top_p: float = None):
         """
         Generates a sequence of tokens by autoregressively predicting new tokens based on the 
         provided context (idx). The generation process can be controlled by temperature, sampling 
@@ -464,26 +479,39 @@ class GPT(nn.Module):
             idx_cond = idx if idx.size(1) <= self.block_size else idx[:, -self.block_size:]
 
             # forward the model to get the logits for the index in the sequence
+            logits = self.forward(idx_cond)
             # pluck the logits at the final step and scale by desired temperature
+            logits = logits / temperature
 
             if not do_sample:
                 # take the most likely token
-                idx_next = ...
+                idx_next = torch.argmax(logits, dim=-1, keepdim=True)
             
             else:
                 # pluck the logits at the final step and scale by desired temperature
-
+                logits = logits[:, -1, :] / temperature
                 # apply softmax to convert logits to (normalized) probabilities
+                probs = F.softmax(logits, dim=-1)
 
                 # optionally only consider top-k logits for sampling. 
                 if top_k is not None:
-                    pass
+                    values, indices = torch.topk(probs, top_k, dim=-1)
+                    probs = torch.zeros_like(probs).scatter(1, indices, values)
+                    probs = probs / probs.sum(dim=-1, keepdim=True)
 
                 # optionally apply top-p sampling
                 if top_p is not None:
-                    pass
+                    sorted_probs, sorted_indices = torch.sort(probs, descending=True)
+                    cum_probs = torch.cumsum(sorted_probs, dim=-1)
+                    keep = cum_probs > top_p
+                    keep[..., 1:] = keep[..., :-1].clone()
+                    keep[..., 0] = 1
+                    probs = sorted_probs * keep.float()
+                    probs = probs / probs.sum(dim=-1, keepdim=True)
+                
+                idx_next = torch.multinomial(probs, num_samples=1)
             
             # append sampled index to the running sequence and continue
-            idx = ...
+            idx = torch.cat((idx, idx_next), dim=1)
 
         return idx

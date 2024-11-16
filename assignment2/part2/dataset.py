@@ -6,7 +6,7 @@ from torch.utils.data import Dataset
 
 class CharTokenizer:
     def __init__(self, datafile_path: str, return_tensors: bool = False):
-        data = open(datafile_path, 'r').read()
+        data = open(datafile_path, 'r', encoding="utf-8").read()
         chars = sorted(set(data))
         data_size, vocab_size = len(data), len(chars)
         print('data has %d characters, %d unique.' % (data_size, vocab_size))
@@ -70,7 +70,7 @@ class TextDataset(Dataset):
         self.config = config
 
         # Load text data
-        data = open(datafile_path, 'r').read() 
+        data = open(datafile_path, 'r', encoding="utf-8").read() 
         self.data = data
 
         self.block_size = block_size
