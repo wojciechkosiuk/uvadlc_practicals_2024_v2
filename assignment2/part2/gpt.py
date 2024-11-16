@@ -41,8 +41,12 @@ class RMSNorm(nn.Module):
 
     def forward(self, x):
         # Compute the norm of the input tensor and divide by the norm
+        rms = x.norm(dim=-1, keepdim=True) / math.sqrt(x.size(-1))
         # Scale the normalized tensor by the learned weight parameter
+        x_norm = x / (rms + self.eps)
+        output = x_norm * self.weight
         return output
+
 
 class CausalSelfAttention(nn.Module):
     """
@@ -109,19 +113,19 @@ class CausalSelfAttention(nn.Module):
             Tuple[torch.Tensor, torch.Tensor]: Tuple containing the modified query and key tensors.
         """
         # Generate RoPE embeddings dynamically based on T
-        seq_pos = ...  # Shape: (T)
-        freqs = ...    # Shape: (T, dim // 2)
-        pos_emb = ...  # Shape: (1, 1, T, dim)
-        
+        seq_pos = torch.arange(T, device=xq.device).float()  # Shape: (T)
+        freqs = torch.einsum("i,j->ij", seq_pos, self.inv_freq)  # Shape: (T, dim // 2)
+        pos_emb = torch.cat((freqs.sin(), freqs.cos()), dim=-1).unsqueeze(0).unsqueeze(0)  # Shape: (1, 1, T, dim)
+
         # Split pos into sin and cos components, repeating each to match xq and xk dimensions
-        pos_sin = ...
-        pos_cos = ...
+        pos_sin = pos_emb[..., ::2].repeat(1, 1, 1, 2)
+        pos_cos = pos_emb[..., 1::2].repeat(1, 1, 1, 2)
         
         # Apply RoPE transformation: pair and rotate dimensions
         # Rotate query and key tensors
-        xq_rot = ...
-        xk_rot = ...
-        raise NotImplementedError
+        xq_rot = (xq * pos_cos) + (torch.cat((-xq[..., 1::2], xq[..., ::2]), dim=-1) * pos_sin)
+        xk_rot = (xk * pos_cos) + (torch.cat((-xk[..., 1::2], xk[..., ::2]), dim=-1) * pos_sin)
+        # raise NotImplementedError
         
         return xq_rot, xk_rot
         
@@ -130,11 +134,11 @@ class CausalSelfAttention(nn.Module):
 
         # calculate query, key, values for all heads in batch and move head forward to be the batch dim
         # Split output of attention-head in query, key and value
-        q, k ,v  = ...
+        q, k ,v  = self.c_attn(x).split(self.n_embd, dim=2)
 
-        q = ...
-        k = ...
-        v = ...
+        q = q.view(B, T, self.n_head, C // self.n_head).transpose(1, 2)
+        k = k.view(B, T, self.n_head, C // self.n_head).transpose(1, 2)
+        v = v.view(B, T, self.n_head, C // self.n_head).transpose(1, 2)
 
         if not self.config.abs_emb:
             q, k = self.apply_rotary_emb(q, k, T)
@@ -147,10 +151,12 @@ class CausalSelfAttention(nn.Module):
             y = ...
         else:
             # Compute attention scores
-            att = ... 
+            att = (q @ k.transpose(-2, -1)) * (1.0 / math.sqrt(k.size(-1)))
             # Apply causal mask
+            att = att.masked_fill(self.mask[:, :, :T, :T] == 0, float('-inf'))
             # Apply attention to the values
-            y = ... # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
+            att = torch.softmax(att, dim=-1)
+            y = att @ v # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
         y = y.transpose(1, 2).contiguous().view(B, T, C) # re-assemble all head outputs side by side
 
         # output projection
@@ -183,12 +189,21 @@ class TransformerDecoderBlock(nn.Module):
     def __init__(self, config):
         super().__init__()
         # Initialize the layers
-        raise NotImplementedError
+        self.layer_norm_1 = RMSNorm(config.n_embd)
+        self.self_attention = CausalSelfAttention(config)
+        self.layer_norm_2 = RMSNorm(config.n_embd)
+        self.mlpf = nn.Sequential(
+            nn.Linear(config.n_embd, 4 * config.n_embd),
+            nn.GELU(),
+            nn.Linear(4 * config.n_embd, config.n_embd),
+            nn.Dropout(config.resid_pdrop),
+        )   
+
     def forward(self, x):
         # Forward pass through the Decoder Layer
-        out = ...
-        return out
-
+        x = x + self.self_attention(self.layer_norm_1(x))
+        x = x + self.mlpf(self.layer_norm_2(x))
+        return x
 
 class GPT(nn.Module):
     """ GPT Language Model """
@@ -391,7 +406,8 @@ class GPT(nn.Module):
         # Forward token and position embedders
         # token embeddings of shape (b, t, n_embd)
         # apply dropout to the tokens
-        tok_emb = ...
+        tok_emb = self.transformer.w_token_emb(idx)
+        tok_emb = self.transformer.drop(tok_emb)
 
         if self.config.abs_emb:
             pos = torch.arange(0, t, dtype=torch.long, device=device).unsqueeze(0) # shape (1, t)
@@ -401,8 +417,11 @@ class GPT(nn.Module):
             x = tok_emb
 
         # Iterate through the transformer blocks
+        for block in self.transformer.h:
+            x = block(x)
         # Apply final layer normalization and linear layer to produce logits
-        logits = ...
+        x = self.transformer.ln_f(x)
+        logits = self.lm_head(x)
 
         return logits
 
