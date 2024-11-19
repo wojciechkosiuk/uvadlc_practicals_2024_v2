@@ -148,7 +148,9 @@ class CausalSelfAttention(nn.Module):
         seq_pos = torch.arange(T, device=xq.device)  # Shape: (T)
     
         # Calculate frequency matrix
-        freqs = self.inv_freq.unsqueeze(0) * seq_pos.unsqueeze(-1)  # Shape: (T, dim//2)
+
+        # TODO - .to(xq.device) if does not work on colab
+        freqs = self.inv_freq.to(xq.device).unsqueeze(0) * seq_pos.unsqueeze(-1)  # Shape: (T, dim//2)
         
         # Generate sin and cos embeddings
         sin_emb = torch.sin(freqs)  # Shape: (T, dim//2)
