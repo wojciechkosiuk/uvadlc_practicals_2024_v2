@@ -21,6 +21,7 @@ class GPTLightningModule(pl.LightningModule):
         # Forward pass through the model
         return self.model(x)
 
+@torch.inference_mode()
 def generate(
     model: torch.nn.Module,
     model_type: str,
@@ -28,7 +29,8 @@ def generate(
     num_samples: int = 10,
     n_steps: int = 20,
     do_sample: bool = True,
-    top_k: int = 50,
+    top_k: int = None,
+    top_p: float = 0.6,
     temperature: float = 1.0,
     device: str = "cpu",
     verbose: bool = True,
@@ -44,7 +46,8 @@ def generate(
         num_samples (int, optional): The number of text samples to generate. Defaults to 10.
         n_steps (int, optional): The number of tokens to generate for each sample. Defaults to 20.
         do_sample (bool, optional): Whether to use sampling; set to False for deterministic generation. Defaults to True.
-        top_k (int, optional): The number of highest probability vocabulary tokens to keep for top-k-filtering. Defaults to 50.
+        top_k (int, optional): The number of highest probability vocabulary tokens to keep for top-k-filtering. Defaults to None.
+        top_p (float, optional): The cumulative probability threshold for nucleus sampling. Defaults to 0.6.
         temperature (float, optional): The value used to module the next token probabilities. Defaults to 1.0.
         device (str, optional): The device (e.g., 'cpu' or 'cuda') on which to perform the computation. Defaults to 'cpu'.
         verbose (bool, optional): If True, prints each generated sample. Defaults to True.
@@ -62,7 +65,7 @@ def generate(
     x = x.expand(num_samples, -1)
 
     # forward the model `steps` times to get samples, in a batch
-    y = model.model.generate(x, max_new_tokens=n_steps, do_sample=do_sample, top_k=top_k, temperature=temperature)
+    y = model.model.generate(x, max_new_tokens=n_steps, do_sample=do_sample, top_k=top_k, top_p=top_p, temperature=temperature)
     
     # Decode the predicted outputs 
     decoded_outputs = []
@@ -86,7 +89,10 @@ if __name__ == "__main__":
     parser.add_argument('--num_generated_tokens', type=int, default=77)
     parser.add_argument('--do_sample', type=bool, default=True)
     parser.add_argument('--temperature', type=float, default=1.0)
+    parser.add_argument('--top_k', type=int, default=None)
+    parser.add_argument("--top_p", type=float, default=0.6)
     parser.add_argument('--prompt', type=str, default='Yesterday I went to the ')
+    parser.add_argument('--pretrained_tokenizer', action='store_true')
     gen_args = parser.parse_args()
     for key, value in vars(gen_args).items():
         setattr(args, key, value)
@@ -104,7 +110,7 @@ if __name__ == "__main__":
             new_key = key.replace('model._orig_mod.', 'model.')
             cleaned_state_dict[new_key] = value
         state_dict['state_dict'] = cleaned_state_dict
-    
+
     # Initialize model
     default_cfg = GPT.get_default_config()
     saved_cfg = state_dict['hyper_parameters'] 
@@ -120,8 +126,16 @@ if __name__ == "__main__":
     cfg = argparse.Namespace(**combined_cfg)
     gpt_model = GPT(cfg)
 
-    # Setup dataset and model
-    dataset = TextDataset(args, args.txt_file, args.block_size, CharTokenizer)
+    if args.pretrained_tokenizer:
+        import tiktoken
+        tokenizer = tiktoken.get_encoding("gpt2")
+        args.vocab_size = tokenizer.max_token_value
+    else:
+        tokenizer = CharTokenizer(args.txt_file)
+        args.vocab_size = tokenizer.vocab_size  # Set vocab size from tokenizer
+    # Create the dataset with the tokenizer
+    dataset = TextDataset(args, args.txt_file, args.block_size, tokenizer)
+    
     model = GPTLightningModule(cfg, gpt_model, dataset)
     model.load_state_dict(state_dict['state_dict'])
 
@@ -134,6 +148,8 @@ if __name__ == "__main__":
         num_samples=args.num_samples,
         n_steps=args.num_generated_tokens,
         do_sample=args.do_sample,
+        top_k=args.top_k,
+        top_p=args.top_p,
         temperature=args.temperature,
         device=device,
     )
