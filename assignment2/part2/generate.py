@@ -30,7 +30,7 @@ def generate(
     n_steps: int = 20,
     do_sample: bool = True,
     top_k: int = None,
-    top_p: float = 0.6,
+    top_p: float = None,
     temperature: float = 1.0,
     device: str = "cpu",
     verbose: bool = True,

@@ -541,11 +541,12 @@ class GPT(nn.Module):
                 if top_p is not None:
                     sorted_probs, sorted_indices = torch.sort(probs, descending=True)
                     cum_probs = torch.cumsum(sorted_probs, dim=-1)
-                    keep = cum_probs > top_p
-                    keep[..., 1:] = keep[..., :-1].clone()
-                    keep[..., 0] = 1
-                    probs = sorted_probs * keep.float()
-                    probs = probs / probs.sum(dim=-1, keepdim=True)
+                    keep = cum_probs <= top_p
+                    keep[..., 0] = True
+                    sorted_probs = sorted_probs * keep.float()
+                    sorted_probs = sorted_probs / (sorted_probs.sum(dim=-1, keepdim=True) + 1e-10)
+                    probs = torch.zeros_like(probs)
+                    probs.scatter_(-1, sorted_indices, sorted_probs)
                 
                 idx_next = torch.multinomial(probs, num_samples=1)
             
