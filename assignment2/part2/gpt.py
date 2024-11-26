@@ -41,6 +41,8 @@ class RMSNorm(nn.Module):
 
     def forward(self, x):
         # Compute the norm of the input tensor and divide by the norm
+
+        # TODO - check if correct
         rms = x.norm(dim=-1, keepdim=True) / math.sqrt(x.size(-1))
         # Scale the normalized tensor by the learned weight parameter
         x_norm = x / (rms + self.eps)
@@ -209,6 +211,8 @@ class CausalSelfAttention(nn.Module):
             att = att.masked_fill(self.mask[:, :, :T, :T] == 0, float('-inf'))
             # Apply attention to the values
             att = torch.softmax(att, dim=-1)
+            # TODO - attention dropout
+            att = self.attn_dropout(att)
             y = att @ v # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
         y = y.transpose(1, 2).contiguous().view(B, T, C) # re-assemble all head outputs side by side
 
@@ -247,7 +251,7 @@ class TransformerDecoderBlock(nn.Module):
         self.layer_norm_2 = RMSNorm(config.n_embd)
         self.mlpf = nn.Sequential(
             nn.Linear(config.n_embd, 4 * config.n_embd),
-            nn.GELU(),
+            BERTGELU(),
             nn.Linear(4 * config.n_embd, config.n_embd),
             nn.Dropout(config.resid_pdrop),
         )   
@@ -519,7 +523,8 @@ class GPT(nn.Module):
             # forward the model to get the logits for the index in the sequence
             logits = self.forward(idx_cond)
             # pluck the logits at the final step and scale by desired temperature
-            logits = logits / temperature
+
+            logits = logits[:, -1, :] / temperature
 
             if not do_sample:
                 # take the most likely token
@@ -527,7 +532,8 @@ class GPT(nn.Module):
             
             else:
                 # pluck the logits at the final step and scale by desired temperature
-                logits = logits[:, -1, :] / temperature
+                # TODO - don't divide by temperature twice
+                # logits = logits[:, -1, :] / temperature
                 # apply softmax to convert logits to (normalized) probabilities
                 probs = F.softmax(logits, dim=-1)
 
