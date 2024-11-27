@@ -40,8 +40,9 @@ class RMSNorm(nn.Module):
         self.weight = nn.Parameter(torch.ones(dim))
 
     def forward(self, x):
-        # Compute the norm of the input tensor and divide by the norm
-        # TODO - check if correct
+        # TODO - comments say different than the assignment formula
+
+        # # Compute the norm of the input tensor and divide by the norm
         # rms = x.norm(dim=-1, keepdim=True) / math.sqrt(x.size(-1))
         # # Scale the normalized tensor by the learned weight parameter
         # x_norm = x / (rms + self.eps)
@@ -119,66 +120,26 @@ class CausalSelfAttention(nn.Module):
             Tuple[torch.Tensor, torch.Tensor]: Tuple containing the modified query and key tensors.
         """
         # Generate RoPE embeddings dynamically based on T
-        # seq_pos = torch.arange(T, device=xq.device) # Shape: (T)
-        # freqs = self.inv_freq.unsqueeze(0) * seq_pos.unsqueeze(-1)  # Shape: (T, dim // 2)
-        # # freqs = torch.einsum("i,j->ij", seq_pos, self.inv_freq.to(xq.device))  # Shape: (T, dim // 2)
-        # # pos_emb = torch.cat([torch.sin(freqs), torch.cos(freqs)], dim=-1)
-        # # pos_emb = pos_emb.unsqueeze(0).unsqueeze(0)
-
-        # # # Split pos into sin and cos components, repeating each to match xq and xk dimensions
-        # # pos_sin = pos_emb[..., :xq.size(-1) // 2]
-        # # pos_cos = pos_emb[..., xq.size(-1) // 2:]
-        # # pos_sin = torch.cat([pos_sin, pos_sin], dim=-1)
-        # # pos_cos = torch.cat([pos_cos, pos_cos], dim=-1) 
-        
-        # # # Apply RoPE transformation: pair and rotate dimensions
-        # # # Rotate query and key tensors
-        # # xq_rot = (xq * pos_cos) + (torch.cat([-xq[..., 1::2], xq[..., ::2]], dim=-1) * pos_sin)
-        # # xk_rot = (xk * pos_cos) + (torch.cat([-xk[..., 1::2], xk[..., ::2]], dim=-1) * pos_sin)
-        
-        # sin_emb = torch.sin(freqs).unsqueeze(0).unsqueeze(0)  # Shape: (1, 1, T, head_dim // 2)
-        # cos_emb = torch.cos(freqs).unsqueeze(0).unsqueeze(0)  # Shape: (1, 1, T, head_dim // 2)
-        
-        # # Step 4: Expand sin and cos embeddings to match the dimensions of xq and xk
-        # sin_emb = torch.cat([sin_emb, sin_emb], dim=-1)  # Shape: (1, 1, T, head_dim)
-        # cos_emb = torch.cat([cos_emb, cos_emb], dim=-1)  # Shape: (1, 1, T, head_dim)
-        
-        # # Step 5: Apply rotary transformation to each pair of dimensions
-        # xq1 = torch.cat([-xq[..., 1::2], xq[..., ::2]], dim=-1)  # Shape: (B, nh, T, head_dim)
-        # xk1 = torch.cat([-xk[..., 1::2], xk[..., ::2]], dim=-1)  # Shape: (B, nh, T, head_dim)
-        # xq_rot = (xq * cos_emb) + (xq1 * sin_emb)
-        # xk_rot = (xk * cos_emb) + (xk1 * sin_emb)       
-
-        # return xq_rot, xk_rot
 
         seq_pos = torch.arange(T, device=xq.device)  # Shape: (T)
-    
-        # Calculate frequency matrix
-
-        # TODO - .to(xq.device) if does not work on colab
         freqs = self.inv_freq.to(xq.device).unsqueeze(0) * seq_pos.unsqueeze(-1)  # Shape: (T, dim//2)
+
+        pos_sin = torch.sin(freqs)
+        pos_cos = torch.cos(freqs)
+
+        pos_sin = pos_sin.unsqueeze(0).unsqueeze(0)
+        pos_cos = pos_cos.unsqueeze(0).unsqueeze(0)
         
-        # Generate sin and cos embeddings
-        sin_emb = torch.sin(freqs)  # Shape: (T, dim//2)
-        cos_emb = torch.cos(freqs)  # Shape: (T, dim//2)
-        
-        # Reshape embeddings to match input tensor dimensions
-        sin_emb = sin_emb.unsqueeze(0).unsqueeze(0)  # Shape: (1, 1, T, dim//2)
-        cos_emb = cos_emb.unsqueeze(0).unsqueeze(0)  # Shape: (1, 1, T, dim//2)
-        
-        # Split input tensors into even and odd dimensions
-        xq_even = xq[..., ::2]  # Shape: (B, nh, T, dim//2)
-        xq_odd = xq[..., 1::2]  # Shape: (B, nh, T, dim//2)
+        xq_even = xq[..., ::2]
+        xq_odd = xq[..., 1::2]
         xk_even = xk[..., ::2]
         xk_odd = xk[..., 1::2]
         
-        # Apply rotation to each pair of dimensions
-        xq_rot_even = xq_even * cos_emb - xq_odd * sin_emb
-        xq_rot_odd = xq_odd * cos_emb + xq_even * sin_emb
-        xk_rot_even = xk_even * cos_emb - xk_odd * sin_emb
-        xk_rot_odd = xk_odd * cos_emb + xk_even * sin_emb
+        xq_rot_even = xq_even * pos_cos - xq_odd * pos_sin
+        xq_rot_odd = xq_odd * pos_cos + xq_even * pos_sin
+        xk_rot_even = xk_even * pos_cos - xk_odd * pos_sin
+        xk_rot_odd = xk_odd * pos_cos + xk_even * pos_sin
         
-        # Interleave the rotated dimensions back together
         xq_rot = torch.zeros_like(xq)
         xk_rot = torch.zeros_like(xk)
         xq_rot[..., ::2] = xq_rot_even
@@ -215,7 +176,6 @@ class CausalSelfAttention(nn.Module):
             att = att.masked_fill(self.mask[:, :, :T, :T] == 0, float('-inf'))
             # Apply attention to the values
             att = torch.softmax(att, dim=-1)
-            # TODO - attention dropout
             att = self.attn_dropout(att)
             y = att @ v # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
         y = y.transpose(1, 2).contiguous().view(B, T, C) # re-assemble all head outputs side by side
@@ -527,7 +487,6 @@ class GPT(nn.Module):
             # forward the model to get the logits for the index in the sequence
             logits = self.forward(idx_cond)
             # pluck the logits at the final step and scale by desired temperature
-
             logits = logits[:, -1, :] / temperature
 
             if not do_sample:
@@ -535,9 +494,6 @@ class GPT(nn.Module):
                 idx_next = torch.argmax(logits, dim=-1, keepdim=True)
             
             else:
-                # pluck the logits at the final step and scale by desired temperature
-                # TODO - don't divide by temperature twice
-                # logits = logits[:, -1, :] / temperature
                 # apply softmax to convert logits to (normalized) probabilities
                 probs = F.softmax(logits, dim=-1)
 
