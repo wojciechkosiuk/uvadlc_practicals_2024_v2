@@ -56,6 +56,7 @@ def generate(
         - The function uses the char level tokenizer we used for training.
         - The function is designed to handle both conditional and unconditional text generation based on the provided prompt.
     """
+    model.eval()
     dix = model.dataset.tokenizer.encode(prompt)
     # return as tensors
     x = torch.tensor(dix, dtype=torch.long).to(device).unsqueeze(0)
