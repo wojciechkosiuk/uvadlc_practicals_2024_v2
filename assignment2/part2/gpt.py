@@ -40,18 +40,10 @@ class RMSNorm(nn.Module):
         self.weight = nn.Parameter(torch.ones(dim))
 
     def forward(self, x):
-        # TODO - for training use faster formula, finally upload the correct one
-        # Compute the norm of the input tensor and divide by the norm
-        rms = x.norm(dim=-1, keepdim=True) / math.sqrt(x.size(-1))
-        # Scale the normalized tensor by the learned weight parameter
-        x_norm = x / (rms + self.eps)
+        rms = torch.sqrt(torch.mean(x**2, dim=-1, keepdim=True) + self.eps)
+        x_norm = x / rms
         output = x_norm * self.weight
         return output
-
-        # rms = torch.sqrt(torch.mean(x**2, dim=-1, keepdim=True) + self.eps)
-        # x_norm = x / rms
-        # output = x_norm * self.weight
-        # return output
 
 
 class CausalSelfAttention(nn.Module):
