@@ -1,0 +1,1129 @@
+This file contains the output for the question 4.g. (in numeration on ANS). These are the results of the generate.py tested with different prompts, top_k, top_p, and temperature parameter values
+
+
+Prompts:
+
+Default:
+- Yesterday I went to the
+
+Knowldege:
+- In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw (answer: Prince)
+- In Hansel and Gretel, parents wanted to leave their children alone in (answer: forest) 
+
+Exact train set:
+-	Once upon a time, a mouse, a bird, and a sausage, entered (Once upon a time, a mouse, a bird, and a sausage, entered into partnership and set up house together.)
+
+Overall:
+-	Given the following text, rewrite it without spaces: “a b c d e f g h”. I will start: “a
+-	Hansel has two apples and Gretel has three apples. How many apples do they have together? The answer is
+Overall (one shot):
+-	Given the following text, rewrite it without spaces. For example: “a b c d e f g h” will be “abcdefgh”. Now do the same for “a c e g i k m”. I will start “a
+-	“Two plus two is four. Two plus three is 
+
+Temperature:
+-	1, 0.5
+Top_p:
+-	0.6, 0.9
+
+Top_k:
+-	10, 50
+
+Notation in the prints above the generated text: top_k, top_p, temperature (e.g. None 0.6 1.0 suggests top_p=0.6 and temperature=1.0)
+
+
+Results (3 epochs):
+
+Seed set to 0
+True False
+None 0.6 1.0
+None 0.6 1.0
+--------------------------------------------------------------------------------
+Yesterday I went to the church, and devoured had to be carried through the streets, some peas
+certai
+--------------------------------------------------------------------------------
+Yesterday I went to the castle, and then, you will earn your bread promise,
+and then the huntsman pi
+--------------------------------------------------------------------------------
+Yesterday I went to the chamber he heard a strange whispering had forgotten how lies had picked
+them
+--------------------------------------------------------------------------------
+Yesterday I went to the crowd, and when they had
+finished their meal, they could wear all of great l
+--------------------------------------------------------------------------------
+Yesterday I went to the cupboard, and then we will soon find the way.’ And when the fox felt
+the fir
+--------------------------------------------------------------------------------
+Yesterday I went to the castle for him. He held one foot met a little sister, and said: ‘Do not
+for 
+--------------------------------------------------------------------------------
+Yesterday I went to the barrel on two snips and boiled up their houses, and then
+seeen all there was
+--------------------------------------------------------------------------------
+Yesterday I went to the court to the
+royal table, but when she was colded by a great way, and was no
+--------------------------------------------------------------------------------
+Yesterday I went to the cruel of a
+riser nor avail. Then she placed beside him a loaf, and some meat
+--------------------------------------------------------------------------------
+Yesterday I went to the wood and remained this, for they should go like to see the dog in the mornin
+
+True False
+number of parameters: 10.73M
+data has 540241 characters, 87 unique.
+running on device cpu
+None 0.9 1.0
+None 0.9 1.0
+--------------------------------------------------------------------------------
+Yesterday I went to the country to him, seized the nightingale, and went away
+with her. And the king
+--------------------------------------------------------------------------------
+Yesterday I went to the country this strange accow. So the giants had to cut
+open the door, and out 
+--------------------------------------------------------------------------------
+Yesterday I went to the chamber he heard a strange whisps
+where the bride had done drinking, and wou
+--------------------------------------------------------------------------------
+Yesterday I went to the crowd, and when they had
+finished their meal, they could sleep their fill ti
+--------------------------------------------------------------------------------
+Yesterday I went to the cupboard, and nothing can be hidden from
+you.’
+
+The third brother met a hunt
+--------------------------------------------------------------------------------
+Yesterday I went to the castle where he had been waiting for a
+little hundred arts remarked even, fo
+--------------------------------------------------------------------------------
+Yesterday I went to the barrel of the last to the court
+that in the well, and they suit in their mou
+--------------------------------------------------------------------------------
+Yesterday I went to the court to the
+royal table, but when he heard the half of the king’s men had a
+--------------------------------------------------------------------------------
+Yesterday I went to the cruel of a
+rilent plantation, and the stars were friendly and kind to her aw
+--------------------------------------------------------------------------------
+Yesterday I went to the wood for me, but they have not a house to set a avaliage at my
+little house.
+Seed set to 0
+10 None 1.0
+10 None 1.0
+--------------------------------------------------------------------------------
+Yesterday I went to the country to
+my neighbourhood of the castle; I
+must then return to look after 
+--------------------------------------------------------------------------------
+Yesterday I went to the country this strange across the sat a small piece,
+the old king held a large
+--------------------------------------------------------------------------------
+Yesterday I went to the chamber hold of my
+head.’ ‘No, I have let the bench to a little house there 
+--------------------------------------------------------------------------------
+Yesterday I went to the crowd, and when made the
+youngest son too weat in the forest, and had not qu
+--------------------------------------------------------------------------------
+Yesterday I went to the crushes and the very happy, or you will support me.’ ‘Learn what you would h
+--------------------------------------------------------------------------------
+Yesterday I went to the clock-case, was the only one he did not feet his
+part of the following word 
+--------------------------------------------------------------------------------
+Yesterday I went to the barrow down everything; and when anyone else asked her to
+dance, he said, ‘T
+--------------------------------------------------------------------------------
+Yesterday I went to the court to the
+royal table, but when he had cut himself and her troubles to so
+--------------------------------------------------------------------------------
+Yesterday I went to the cruel and sat down on the steps proclemb, and the cord told
+the captain at a
+--------------------------------------------------------------------------------
+Yesterday I went to the
+nuts; so they said no, they had found nothing but her but one day to cry to 
+
+50 None 1.0
+50 None 1.0
+--------------------------------------------------------------------------------
+Yesterday I went to the country to
+my neighbourhood of the castle; I
+must then return to look after 
+--------------------------------------------------------------------------------
+Yesterday I went to the country this strange across the sat a small piece,
+the old king held a large
+--------------------------------------------------------------------------------
+Yesterday I went to the chamber hold of my
+head.’ ‘No, I have let the bench to a little house there 
+--------------------------------------------------------------------------------
+Yesterday I went to the crowd, and when made the
+youngest son too weat in the forest, and had not qu
+--------------------------------------------------------------------------------
+Yesterday I went to the crushes and the very happy, or you will support me.’ ‘Learn what you would h
+--------------------------------------------------------------------------------
+Yesterday I went to the clock-case, was the only one he did not feet his
+part of the following word 
+--------------------------------------------------------------------------------
+Yesterday I went to the barrow down everything; and when anyone else asked her to
+dance, he said, ‘T
+--------------------------------------------------------------------------------
+Yesterday I went to the court to the
+royal table, but when he had cut himself and her troubles to so
+--------------------------------------------------------------------------------
+Yesterday I went to the cruel and sat down on the steps proclemb, and the cord told
+the captain at a
+--------------------------------------------------------------------------------
+Yesterday I went to the
+nuts; so they said no, they had found nothing but her but one day to cry to 
+
+None 0.6 0.5
+None 0.6 0.5
+--------------------------------------------------------------------------------
+Yesterday I went to the church, and devoured had to be carried through the streets, some peas
+certai
+--------------------------------------------------------------------------------
+Yesterday I went to the castle, and then, you will earn your bread promise,
+and then the huntsman pi
+--------------------------------------------------------------------------------
+Yesterday I went to the chamber he heard a strange whispering had forgotten how lies had picked
+them
+--------------------------------------------------------------------------------
+Yesterday I went to the crowd, and when they had
+finished their meal, they could wear all of great l
+--------------------------------------------------------------------------------
+Yesterday I went to the cupboard, and then we will soon find the way.’ And when the fox felt
+the fir
+--------------------------------------------------------------------------------
+Yesterday I went to the castle for him. He held one foot met a little sister, and said: ‘Do not
+for 
+--------------------------------------------------------------------------------
+Yesterday I went to the barrel on two snips and boiled up their houses, and then
+seeen all there was
+--------------------------------------------------------------------------------
+Yesterday I went to the court to the
+royal table, but when she was cleared, and put him down to his 
+--------------------------------------------------------------------------------
+Yesterday I went to the cruel of a
+riser nor avail. Then she placed beside him a loaf, and some meat
+--------------------------------------------------------------------------------
+Yesterday I went to the wood and remained this, for they should go like to see the dog in the mornin
+
+None 0.9 0.5
+None 0.9 0.5
+--------------------------------------------------------------------------------
+Yesterday I went to the country to him, stood, looking very greating which he could
+not eat with it 
+--------------------------------------------------------------------------------
+Yesterday I went to the castle, and then, you will earn your bread promise,
+and then the huntsman pi
+--------------------------------------------------------------------------------
+Yesterday I went to the chamber he heard a strange whispering had forgotten how lies had picked
+them
+--------------------------------------------------------------------------------
+Yesterday I went to the crowd, and when they had
+finished their meal, they could wear all of great l
+--------------------------------------------------------------------------------
+Yesterday I went to the cupboard, and then we will soon find the way.’ And when the fox felt
+the fir
+--------------------------------------------------------------------------------
+Yesterday I went to the castle for him. He held one foot met a little sister, and said: ‘Do not
+for 
+--------------------------------------------------------------------------------
+Yesterday I went to the barrel on two snips and boiled up their houses, and then
+seeen all there was
+--------------------------------------------------------------------------------
+Yesterday I went to the court to the
+royal table, but when he heard the half of the king’s men had a
+--------------------------------------------------------------------------------
+Yesterday I went to the cruel of a
+rilent plantation, and the stars were friendly and kind to her aw
+--------------------------------------------------------------------------------
+Yesterday I went to the wood for me, but they have seen it up still and watching it.’
+
+The king did 
+
+10 None 0.5
+10 None 0.5
+--------------------------------------------------------------------------------
+Yesterday I went to the country to
+my neighbourhood of the castle; I
+must then return to look after 
+--------------------------------------------------------------------------------
+Yesterday I went to the country this strange accow. So the giants had to cut
+open the window, and th
+--------------------------------------------------------------------------------
+Yesterday I went to the chamber hold of them, and you must catch
+it first.’ ‘I fear one unicorn stil
+--------------------------------------------------------------------------------
+Yesterday I went to the crowd, and when they had
+faithfully expatiated on the forest came by side, q
+--------------------------------------------------------------------------------
+Yesterday I went to the cupboard, and nothing can be hidden from
+you.’
+
+The third brother met a hunt
+--------------------------------------------------------------------------------
+Yesterday I went to the castle where he had
+never in the corner behind the stove,
+and they gave him 
+--------------------------------------------------------------------------------
+Yesterday I went to the barrow down everything; and when anyone else asked her to
+dance, he said, ‘T
+--------------------------------------------------------------------------------
+Yesterday I went to the court to the
+royal table, but when he heard the half of the king’s men had a
+--------------------------------------------------------------------------------
+Yesterday I went to the cruel of a
+rilent plantation, and the stars were friendly and kind to her a 
+--------------------------------------------------------------------------------
+Yesterday I went to the
+following was fast asleep; for she was even now with the lost one of his
+mis
+
+50 None 0.5
+50 None 0.5
+--------------------------------------------------------------------------------
+Yesterday I went to the country to
+my neighbourhood of the castle; I
+must then return to look after 
+--------------------------------------------------------------------------------
+Yesterday I went to the country this strange accow. So the giants had to cut
+open the window, and th
+--------------------------------------------------------------------------------
+Yesterday I went to the chamber hold of them, and you must catch
+it first.’ ‘I fear one unicorn stil
+--------------------------------------------------------------------------------
+Yesterday I went to the crowd, and when they had
+faithfully expatiated on the forest came by side, q
+--------------------------------------------------------------------------------
+Yesterday I went to the cupboard, and nothing can be hidden from
+you.’
+
+The third brother met a hunt
+--------------------------------------------------------------------------------
+Yesterday I went to the castle where he had
+never in the corner behind the stove,
+and they gave him 
+--------------------------------------------------------------------------------
+Yesterday I went to the barrow down everything; and when anyone else asked her to
+dance, he said, ‘T
+--------------------------------------------------------------------------------
+Yesterday I went to the court to the
+royal table, but when he heard the half of the king’s men had a
+--------------------------------------------------------------------------------
+Yesterday I went to the cruel of a
+rilent plantation, and the stars were friendly and kind to her a 
+--------------------------------------------------------------------------------
+Yesterday I went to the
+following was fast asleep; for she was even now with the lost one of his
+mis
+
+None 0.6 1.0 ( 0 correct)
+None 0.6 1.0
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+cock promisir
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring, an
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+cock perched 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+voice of the 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a golden cage, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a catle fish, a
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring and
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a thort tried, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring lyi
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a very in the d
+
+True False
+number of parameters: 10.73M
+data has 540241 characters, 87 unique.
+running on device cpu
+None 0.9 1.0 (0 correct)
+None 0.9 1.0
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+cock promisir
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw an old rimpens 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+cock perched 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+voice princes
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a golden cage, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a catle fish, a
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring as 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a thort tried, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring lyi
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a very in the d
+
+10 None 1.0 (0 correct)
+10 None 1.0
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+cock pigsty, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw an old rimpens 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a golden fishin
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+voice princes
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a rich
+priches 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw she had
+not see
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold father a
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a thousin it
+wa
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring lyi
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a very heavy: a
+
+
+50 None 1.0 (0 correct)
+50 None 1.0
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+cock pigsty, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw an old rimpens 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a golden fishin
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+voice princes
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a rich
+priches 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw she had
+not see
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold father a
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a thousin it
+wa
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring lyi
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a very heavy: a
+
+None 0.6 0.5
+None 0.6 0.5
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+cock promisie
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring, an
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+cock perched 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+voice of the 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a golden cage, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a catle fish, a
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring and
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a thort tried, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring lyi
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a very in the a
+
+True False
+number of parameters: 10.73M
+data has 540241 characters, 87 unique.
+running on device cpu
+None 0.9 0.5
+None 0.9 0.5
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+cock promisie
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring, an
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+cock perched 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+voice of the 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a golden cage, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a catle fish, a
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring and
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a thort tried, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring lyi
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a very in the d
+
+
+10 None 0.5
+10 None 0.5
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+cock pigsty, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw an old rimpens 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a golden fish o
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+voice or thri
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a golden cage, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a catle fish, a
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring and
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a thort tried, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring lyi
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a very in the d
+
+50 None 0.5
+50 None 0.5
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+cock pigsty, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw an old rimpens 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a golden fish o
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a
+voice or thri
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a golden cage, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a catle fish, a
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring and
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a thort tried, 
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a gold ring lyi
+--------------------------------------------------------------------------------
+In The Frog-Prince, when the princess awoke after the third night instead of the frog she saw a very in the d
+
+
+None 0.6 1.0 (3 correct)
+None 0.6 1.0
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set free. Then the little man took leave of him.
+
+Dumml
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up with the street, and the axe cut him in the arm,
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time a green meadow w
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and burnt to the water.
+
+The girls came just in time; they 
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+part of the gold. They lived each other dearly, but it was not long bef
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partners and shuttering to the back and said, ‘Let him down in the towe
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+par-royal cottage. Now they thought when they came to the hazel-tree, a
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+paragraph 1.E.
+
+1.E.7.  Do not charge a deep revenge.  The next day the
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+
+
+None 0.9 1.0 (3 correct)
+None 0.9 1.0
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+part of door to the trunk, and was sure that the servant had betrayed h
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up put them into the middle of the stairs. Then she
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time a green meadow w
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and burnt to die of the water, and lay gasping
+and nearly d
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+part of the grass, and then she would neither learn nor more. But he ha
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partners and self-denial!’ said Hans, as he gave the bobling hite sound
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+par-royal cottage. Now they thought when they came to the hazel-tree, a
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+paragraph 1.E.
+
+1.C.7.  Do not charge a defect in this work, you must c
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+
+10 None 1.0 (1 correct)
+10 None 1.0
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+part of distriction 4, she and the wolf went away with her as red she s
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up put them into the middle of the stairs, where th
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered
+with anyone.
+
+The third day, however, was still not disheartened; and thinki
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+palace, and the following morning: and that was really a very delightfu
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+part and sprang him and she had left for him, she finished with the fol
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partners and self-denial!’ said Hans, as he gave the bobling had ordere
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+paragraph 1.E.
+
+1.C.3.  If any are provision of this agreement, disclai
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and see until they means because I have seen in mind that y
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered
+themselves with twelve handsome princes in them, she was saying that she to
+
+Seed set to 0
+
+50 None 1.0 (1 correct)
+50 None 1.0
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+part of distriction 4, she and the wolf went away with her as red she s
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up put them into the middle of the stairs, where th
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered
+with anyone.
+
+The third day, however, was still not disheartened; and thinki
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+palace, and the following morning: and that was really a very delightfu
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+part and sprang him and she had left for him, she finished with the fol
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partners and self-denial!’ said Hans, as he gave the bobling had ordere
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+paragraph 1.E.
+
+1.C.3.  If any are provision of this agreement, disclai
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and see until they means because I have seen in mind that y
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered
+themselves with twelve handsome princes in them, she was saying that she to
+
+
+None 0.6 0.5 (3 correct)
+None 0.6 0.5
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set free. Then the little man took leave of him.
+
+Dumml
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up with the street, and the axe cut him in the arm,
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time a green meadow w
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and burnt to the water.
+
+The girls came just in time; they 
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+part of the gold. They lived each other dearly, but it was not long bef
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partners and shuttering to the back and said, ‘Let him down in the towe
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+par-royal cottage. Now they thought when they came to the hazel-tree, a
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+paragraph 1.E.
+
+1.E.7.  Do not charge a deep revenge.  The next day the
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+
+None 0.9 0.5 (1 correct)
+None 0.9 0.5
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set free. Then the little man took leave of him.
+
+Dumml
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up with the street, and the axe cut him in the arm,
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time a green meadow w
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and burnt to the water.
+
+The girls came just in time; they 
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+part of the gold. They lived each other dearly, but it was not long bef
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partners and shuttering to the back and said, ‘Let him down in the towe
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+par-royal cottage. Now they thought when they came to the hazel-tree, a
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+paragraph 1.E.
+
+1.E.7.  Do not charge a deep revenge.  The next day the
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+
+10 None 0.5 (2 correct)
+10 None 0.5
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set free the ring away from him, but he held it fast wi
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up put them into the middle of the stairs, and all 
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and burnt the maiden awoke and was greatl, he went as long 
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+part and sprang him and she had left him for free she was going to
+driv
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partners and shuttering to the back and said, ‘I have really to when ov
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+par-red, and cried: ‘Chrim away so much that it was
+welling in the mark
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+paragraph 1.E.
+
+1.C.7.  Do not charge a deep reventure of Project Guten
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered
+the cottage-door to run all these skins that stood in the stables; and
+when 
+
+
+50 None 0.5 (2 correct)
+50 None 0.5
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set free the ring away from him, but he held it fast wi
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up put them into the middle of the stairs, and all 
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and burnt the maiden awoke and was greatl, he went as long 
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+part and sprang him and she had left him for free she was going to
+driv
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partners and shuttering to the back and said, ‘I have really to when ov
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+par-red, and cried: ‘Chrim away so much that it was
+welling in the mark
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+paragraph 1.E.
+
+1.C.7.  Do not charge a deep reventure of Project Guten
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered into
+partnership and set up house together. For a long time all went well;
+t
+--------------------------------------------------------------------------------
+Once upon a time, a mouse, a bird, and a sausage, entered
+the cottage-door to run all these skins that stood in the stables; and
+when 
+
+
+None 0.6 1.0
+None 0.6 1.0
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+soft some more
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a very
+well to f
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+white meal tha
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+what will be a
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+man will have 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: at
+this the boy 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and when
+he had 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: andth,
+who was t
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and
+have you lea
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+what will be a
+
+
+None 0.9 1.0
+None 0.9 1.0
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+soft some more
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a very
+well to f
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+ ‘Open the doo
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+what will be c
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+man will have 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: at
+home with the
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and when
+he had 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: andthe
+w the poo
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and
+have you lea
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+what will be a
+
+
+10 None 1.0
+10 None 1.0
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+softly, when o
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a very
+well to f
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+ ‘Open the doo
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+wolf summons; 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+draught of win
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: at
+last he said,
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and when I am
+us
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: andthe
+wheel mak
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and upon
+a fello
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+what will be a
+
+
+50 None 1.0
+50 None 1.0
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+softly, when o
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a very
+well to f
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+ ‘Open the doo
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+wolf summons; 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+draught of win
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: at
+last he said,
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and when I am
+18
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: andthe
+wheel mak
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and upon
+a fello
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+what will be a
+
+
+None 0.6 0.5
+None 0.6 0.5
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+soft some more
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a very
+well to f
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+white meal tha
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+what will be a
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+man will have 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: at
+this the boy 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and when
+he had 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: andth,
+who was t
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and
+have you lea
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+what will be a
+
+
+None 0.9 0.5
+None 0.9 0.5
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+soft some more
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a very
+well to f
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+white meal tha
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+what will be a
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+man will have 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: at
+this the boy 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and when
+he had 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: andth,
+who was t
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and
+have you lea
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+what will be a
+
+
+10 None 0.5
+10 None 0.5
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+soft some more
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a very
+well to f
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+white maid sai
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+wolf sulkily i
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+man will have 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: at
+home with the
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and when I am th
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: andthe
+water whi
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and
+he walked ju
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+what will be a
+
+
+50 None 0.5
+50 None 0.5
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+soft some more
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a very
+well to f
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+white maid sai
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+wolf sulkily i
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+man will have 
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: at
+home with the
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and when I am th
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: andthe
+water whi
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: and
+he walked ju
+--------------------------------------------------------------------------------
+Given the following text, rewrite it without spaces. For example: a b c d e f g h will be abcdefgh. Now do the same for a c e g i k m. I will start: a
+what will be a
+

@@ -30,7 +30,7 @@ def generate(
     n_steps: int = 20,
     do_sample: bool = True,
     top_k: int = None,
-    top_p: float = 0.6,
+    top_p: float = None,
     temperature: float = 1.0,
     device: str = "cpu",
     verbose: bool = True,
@@ -90,7 +90,7 @@ if __name__ == "__main__":
     parser.add_argument('--do_sample', type=bool, default=True)
     parser.add_argument('--temperature', type=float, default=1.0)
     parser.add_argument('--top_k', type=int, default=None)
-    parser.add_argument("--top_p", type=float, default=0.6)
+    parser.add_argument("--top_p", type=float, default=None)
     parser.add_argument('--prompt', type=str, default='Yesterday I went to the ')
     parser.add_argument('--pretrained_tokenizer', action='store_true')
     gen_args = parser.parse_args()
