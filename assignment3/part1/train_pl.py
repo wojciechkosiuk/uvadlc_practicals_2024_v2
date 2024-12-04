@@ -71,14 +71,10 @@ class VAE(pl.LightningModule):
         # PUT YOUR CODE HERE  #
         #######################
         batch_size = imgs.shape[0]
-        
-        # Encode the images
         mean, log_std = self.encoder(imgs)
 
-        # Sample from the latent space
-        z = sample_reparameterize(mean, log_std)
-
-        # Decode the samples
+        std = torch.exp(log_std)
+        z = sample_reparameterize(mean, std)
         x_hat = self.decoder(z)  # Shape: [B, 16, H, W]
 
         # Reshape predictions and targets for cross entropy
