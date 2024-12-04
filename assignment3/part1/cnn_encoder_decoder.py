@@ -38,7 +38,24 @@ class CNNEncoder(nn.Module):
         #######################
         # PUT YOUR CODE HERE  #
         #######################
-        raise NotImplementedError
+        act_fn = nn.ReLU
+        c_hid = num_filters
+        self.net = nn.Sequential(
+            nn.Conv2d(num_input_channels, c_hid, kernel_size=3, padding=1, stride=2), # 32x32 => 16x16
+            act_fn(),
+            nn.Conv2d(c_hid, c_hid, kernel_size=3, padding=1),
+            act_fn(),
+            nn.Conv2d(c_hid, 2*c_hid, kernel_size=3, padding=1, stride=2), # 16x16 => 8x8
+            act_fn(),
+            nn.Conv2d(2*c_hid, 2*c_hid, kernel_size=3, padding=1),
+            act_fn(),
+            nn.Conv2d(2*c_hid, 2*c_hid, kernel_size=3, padding=1, stride=2), # 8x8 => 4x4
+            act_fn(),
+            nn.Flatten(), # Image grid to single feature vector
+            nn.Linear(2*16*c_hid, 2*z_dim)
+        )
+
+
         #######################
         # END OF YOUR CODE    #
         #######################
@@ -56,9 +73,8 @@ class CNNEncoder(nn.Module):
         #######################
         # PUT YOUR CODE HERE  #
         #######################
-        mean = None
-        log_std = None
-        raise NotImplementedError
+        x = self.net(x)
+        mean, log_std = torch.chunk(x, 2, dim=1)
         #######################
         # END OF YOUR CODE    #
         #######################
@@ -84,7 +100,26 @@ class CNNDecoder(nn.Module):
         #######################
         # PUT YOUR CODE HERE  #
         #######################
-        raise NotImplementedError
+        c_hid = num_filters
+        act_fn = nn.ReLU()
+
+        self.linear = nn.Sequential(
+            nn.Linear(z_dim, 2 * 16 * c_hid),
+            act_fn
+        )
+
+        self.decoder = nn.Sequential(
+            # First transposed conv: adjust output padding to get exact dimensions
+            nn.ConvTranspose2d(2*c_hid, 2*c_hid, kernel_size=3, padding=1, stride=2, output_padding=0),  # 4x4 => 7x7
+            act_fn,
+            nn.Conv2d(2*c_hid, 2*c_hid, kernel_size=3, padding=1),
+            act_fn,
+            nn.ConvTranspose2d(2*c_hid, c_hid, kernel_size=3, padding=1, stride=2, output_padding=1),  # 7x7 => 14x14
+            act_fn,
+            nn.Conv2d(c_hid, c_hid, kernel_size=3, padding=1),
+            act_fn,
+            nn.ConvTranspose2d(c_hid, num_input_channels, kernel_size=3, padding=1, stride=2, output_padding=1),  # 14x14 => 28x28
+        )
         #######################
         # END OF YOUR CODE    #
         #######################
@@ -102,8 +137,14 @@ class CNNDecoder(nn.Module):
         #######################
         # PUT YOUR CODE HERE  #
         #######################
-        x = None
-        raise NotImplementedError
+        batch_size = z.shape[0]
+        
+        # Project and reshape
+        x = self.linear(z)
+        x = x.reshape(batch_size, -1, 4, 4)  # -1 will be 2*num_filters
+        
+        # Apply transposed convolutions
+        x = self.decoder(x)
         #######################
         # END OF YOUR CODE    #
         #######################

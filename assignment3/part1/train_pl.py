@@ -70,10 +70,34 @@ class VAE(pl.LightningModule):
         #######################
         # PUT YOUR CODE HERE  #
         #######################
-        L_rec = None
-        L_reg = None
-        bpd = None
-        raise NotImplementedError
+        batch_size = imgs.shape[0]
+        
+        # Encode the images
+        mean, log_std = self.encoder(imgs)
+
+        # Sample from the latent space
+        z = sample_reparameterize(mean, log_std)
+
+        # Decode the samples
+        x_hat = self.decoder(z)  # Shape: [B, 16, H, W]
+
+        # Reshape predictions and targets for cross entropy
+        x_hat = x_hat.permute(0, 2, 3, 1)  # Shape: [B, H, W, 16]
+        x_hat = x_hat.reshape(-1, 16)  # Shape: [B*H*W, 16]
+        
+        # Flatten the target images
+        target = imgs.squeeze(1).reshape(-1)  # Shape: [B*H*W]
+
+        # Calculate the reconstruction loss (average per image)
+        L_rec = F.cross_entropy(x_hat, target.long(), reduction='sum') / batch_size
+
+        # Calculate the regularization loss (average per image)
+        L_reg = KLD(mean, log_std).sum() / batch_size
+
+        # Calculate the bits per dimension
+        elbo = L_rec + L_reg
+        bpd = elbo_to_bpd(elbo, imgs.shape)
+
         #######################
         # END OF YOUR CODE    #
         #######################
@@ -92,7 +116,17 @@ class VAE(pl.LightningModule):
         # PUT YOUR CODE HERE  #
         #######################
         x_samples = None
-        raise NotImplementedError
+        
+        # Sample from the latent space
+        z = torch.randn(batch_size, self.hparams.z_dim)
+
+        # Decode the samples
+        x_samples = self.decoder(z)
+        x_samples = torch.argmax(x_samples, dim=1)
+
+        # Convert the samples to 4-bit images
+        x_samples = x_samples.view(batch_size, 1, 28, 28)
+
         #######################
         # END OF YOUR CODE    #
         #######################

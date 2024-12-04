@@ -36,7 +36,12 @@ def sample_reparameterize(mean, std):
     # PUT YOUR CODE HERE  #
     #######################
     z = None
-    raise NotImplementedError
+    
+    # Sample from the standard normal distribution
+    epsilon = torch.randn_like(mean)
+
+    # Reparameterize the sample
+    z = mean + std * epsilon
     #######################
     # END OF YOUR CODE    #
     #######################
@@ -59,7 +64,11 @@ def KLD(mean, log_std):
     # PUT YOUR CODE HERE  #
     #######################
     KLD = None
-    raise NotImplementedError
+    
+    # Calculate the KLD
+    KLD = 0.5 * (torch.exp(2 * log_std) + mean ** 2 - 1 - 2 * log_std)
+    KLD = KLD.sum(dim=-1)
+
     #######################
     # END OF YOUR CODE    #
     #######################
@@ -79,7 +88,11 @@ def elbo_to_bpd(elbo, img_shape):
     # PUT YOUR CODE HERE  #
     #######################
     bpd = None
-    raise NotImplementedError
+    
+    # Calculate the number of pixels in the image
+    num_pixels = np.prod(img_shape[1:])
+    bpd = elbo / (np.log(2) * num_pixels)
+
     #######################
     # END OF YOUR CODE    #
     #######################
@@ -111,7 +124,18 @@ def visualize_manifold(decoder, grid_size=20):
     # PUT YOUR CODE HERE  #
     #######################
     img_grid = None
-    raise NotImplementedError
+    
+    # Create a grid of z values
+    z_values = torch.linspace(0.5 / grid_size, 1.5 - 0.5 / grid_size, grid_size)
+    z_values = torch.erfinv(2 * z_values - 1) * np.sqrt(2)
+    z_values = torch.meshgrid(z_values, z_values)
+    z_values = torch.stack(z_values, dim=-1).reshape(-1, 2)
+
+    # Decode the z values
+    img_grid = decoder(z_values)
+    img_grid = torch.sigmoid(img_grid)
+    img_grid = make_grid(img_grid, nrow=grid_size)
+
     #######################
     # END OF YOUR CODE    #
     #######################
