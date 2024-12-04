@@ -111,10 +111,8 @@ class VAE(pl.LightningModule):
         #######################
         # PUT YOUR CODE HERE  #
         #######################
-        x_samples = None
-        
-        # Sample from the latent space
-        z = torch.randn(batch_size, self.hparams.z_dim)
+
+        z = torch.randn(batch_size, self.hparams.z_dim, device=self.device)
 
         # Decode the samples
         x_samples = self.decoder(z)
@@ -122,6 +120,17 @@ class VAE(pl.LightningModule):
 
         # Convert the samples to 4-bit images
         x_samples = x_samples.view(batch_size, 1, 28, 28)
+        # x_samples = None
+        
+        # # Sample from the latent space
+        # z = torch.randn(batch_size, self.hparams.z_dim)
+
+        # # Decode the samples
+        # x_samples = self.decoder(z)
+        # x_samples = torch.argmax(x_samples, dim=1)
+
+        # # Convert the samples to 4-bit images
+        # x_samples = x_samples.view(batch_size, 1, 28, 28)
 
         #######################
         # END OF YOUR CODE    #
