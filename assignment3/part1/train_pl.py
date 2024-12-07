@@ -88,7 +88,7 @@ class VAE(pl.LightningModule):
         L_rec_per_image = L_rec_total.view(batch_size, -1).sum(dim=1)  # Sum over pixels per image
 
         # Calculate the regularization loss (sum per image)
-        L_reg_per_image = KLD(mean, log_std).sum(dim=1)  # Sum over latent dimensions
+        L_reg_per_image = KLD(mean, log_std)  # Sum over latent dimensions
 
         # Calculate the ELBO for each image in the batch
         elbo_per_image = L_rec_per_image + L_reg_per_image
