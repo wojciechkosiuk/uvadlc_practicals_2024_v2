@@ -84,15 +84,21 @@ class VAE(pl.LightningModule):
         # Flatten the target images
         target = imgs.squeeze(1).reshape(-1)  # Shape: [B*H*W]
 
-        # Calculate the reconstruction loss (average per image)
-        L_rec = F.cross_entropy(x_hat, target.long(), reduction='sum') / batch_size
+        L_rec_total = F.cross_entropy(x_hat, target.long(), reduction='none')
+        L_rec_per_image = L_rec_total.view(batch_size, -1).sum(dim=1)  # Sum over pixels per image
 
-        # Calculate the regularization loss (average per image)
-        L_reg = KLD(mean, log_std).sum() / batch_size
+        # Calculate the regularization loss (sum per image)
+        L_reg_per_image = KLD(mean, log_std).sum(dim=1)  # Sum over latent dimensions
 
-        # Calculate the bits per dimension
-        elbo = L_rec + L_reg
-        bpd = elbo_to_bpd(elbo, imgs.shape)
+        # Calculate the ELBO for each image in the batch
+        elbo_per_image = L_rec_per_image + L_reg_per_image
+
+        # Convert ELBO to BPD (calculates BPD for each image and averages internally)
+        bpd = elbo_to_bpd(elbo_per_image, imgs.shape)
+
+        # Average reconstruction and regularization losses over the batch
+        L_rec = L_rec_per_image.mean()
+        L_reg = L_reg_per_image.mean()
 
         #######################
         # END OF YOUR CODE    #

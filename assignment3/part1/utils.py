@@ -87,11 +87,10 @@ def elbo_to_bpd(elbo, img_shape):
     #######################
     # PUT YOUR CODE HERE  #
     #######################
-    bpd = None
-    
-    # Calculate the number of pixels in the image
     num_pixels = np.prod(img_shape[1:])
-    bpd = elbo / (np.log(2) * num_pixels)
+
+    bpd_per_image = elbo * np.log2(np.e) / num_pixels
+    bpd = bpd_per_image.mean()
 
     #######################
     # END OF YOUR CODE    #
