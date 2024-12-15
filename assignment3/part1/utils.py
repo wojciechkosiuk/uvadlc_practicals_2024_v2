@@ -116,37 +116,37 @@ def visualize_manifold(decoder, grid_size=20):
     #######################
     # PUT YOUR CODE HERE  #
     #######################
-    # img_grid = None
+    img_grid = None
     
-    # z_values = torch.linspace(0.5 / grid_size, 1.5 - 0.5 / grid_size, grid_size)
-    # z_values = torch.erfinv(2 * z_values - 1) * np.sqrt(2)
-    # z_values = torch.meshgrid(z_values, z_values)
-    # z_values = torch.stack(z_values, dim=-1).reshape(-1, 2)
+    z_values = torch.linspace(0.5 / grid_size, 1.5 - 0.5 / grid_size, grid_size)
+    z_values = torch.erfinv(2 * z_values - 1) * np.sqrt(2)
+    z_values = torch.meshgrid(z_values, z_values)
+    z_values = torch.stack(z_values, dim=-1).reshape(-1, 2)
 
-    # img_grid = decoder(z_values)
-    # img_grid = torch.sigmoid(img_grid)
-    # img_grid = make_grid(img_grid, nrow=grid_size)
+    img_grid = decoder(z_values)
+    img_grid = torch.sigmoid(img_grid)
+    img_grid = make_grid(img_grid, nrow=grid_size)
 
-    percentiles = torch.linspace(0.5/grid_size, 1 - 0.5/grid_size, grid_size)
+    # percentiles = torch.linspace(0.5/grid_size, 1 - 0.5/grid_size, grid_size)
     
-    z1, z2 = torch.meshgrid(
-        torch.distributions.Normal(0, 1).icdf(percentiles),
-        torch.distributions.Normal(0, 1).icdf(percentiles),
-        indexing='ij'
-    )
+    # z1, z2 = torch.meshgrid(
+    #     torch.distributions.Normal(0, 1).icdf(percentiles),
+    #     torch.distributions.Normal(0, 1).icdf(percentiles),
+    #     indexing='ij'
+    # )
     
-    z = torch.stack([z1.flatten(), z2.flatten()], dim=1)
+    # z = torch.stack([z1.flatten(), z2.flatten()], dim=1)
     
-    decoded_images = decoder(z)
+    # decoded_images = decoder(z)
     
-    prob = torch.softmax(decoded_images, dim=1)
-    prob = torch.permute(prob, (0, 2, 3, 1))
-    prob = torch.flatten(prob, end_dim=2)
+    # prob = torch.softmax(decoded_images, dim=1)
+    # prob = torch.permute(prob, (0, 2, 3, 1))
+    # prob = torch.flatten(prob, end_dim=2)
 
-    x_samples = torch.multinomial(prob, 1)
-    x_samples = x_samples.reshape(-1, 1, 28, 28)
+    # x_samples = torch.multinomial(prob, 1)
+    # x_samples = x_samples.reshape(-1, 1, 28, 28)
 
-    img_grid = make_grid(x_samples, nrow=grid_size).float()
+    # img_grid = make_grid(x_samples, nrow=grid_size).float()
     #######################
     # END OF YOUR CODE    #
     #######################
