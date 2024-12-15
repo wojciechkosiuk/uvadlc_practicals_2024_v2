@@ -127,26 +127,6 @@ def visualize_manifold(decoder, grid_size=20):
     img_grid = torch.softmax(img_grid, dim=1)
     img_grid = make_grid(img_grid, nrow=grid_size)
 
-    # percentiles = torch.linspace(0.5/grid_size, 1 - 0.5/grid_size, grid_size)
-    
-    # z1, z2 = torch.meshgrid(
-    #     torch.distributions.Normal(0, 1).icdf(percentiles),
-    #     torch.distributions.Normal(0, 1).icdf(percentiles),
-    #     indexing='ij'
-    # )
-    
-    # z = torch.stack([z1.flatten(), z2.flatten()], dim=1)
-    
-    # decoded_images = decoder(z)
-    
-    # prob = torch.softmax(decoded_images, dim=1)
-    # prob = torch.permute(prob, (0, 2, 3, 1))
-    # prob = torch.flatten(prob, end_dim=2)
-
-    # x_samples = torch.multinomial(prob, 1)
-    # x_samples = x_samples.reshape(-1, 1, 28, 28)
-
-    # img_grid = make_grid(x_samples, nrow=grid_size).float()
     #######################
     # END OF YOUR CODE    #
     #######################
