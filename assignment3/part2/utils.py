@@ -104,7 +104,10 @@ def train(model, trainloader, validloader, num_epochs=25, defense_strategy = STA
                         # Get adverserial examples using PGD attack
                         # Add them to the original batch
                         # Make sure the model has the correct labels
-                        raise NotImplementedError()
+                        adv_inputs = pgd_attack(model, inputs, labels, criterion, defense_args)
+                        inputs = torch.cat((inputs, adv_inputs), 0)
+                        labels = torch.cat((labels, labels), 0)
+
                         optimizer.zero_grad()
                         outputs = model(inputs)
                         loss = criterion(outputs, labels)
