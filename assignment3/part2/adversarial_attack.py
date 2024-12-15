@@ -27,11 +27,8 @@ def denormalize(batch, mean=[0.4914, 0.4822, 0.4465], std=[0.247, 0.243, 0.261])
 
 
 def fgsm_attack(image, data_grad, epsilon = 0.25):
-    # Get the sign of the data gradient (element-wise)
     sign_data_grad = data_grad.sign()
-    # Create the perturbed image, scaled by epsilon
     perturbed_image = image + epsilon * sign_data_grad
-    # Make sure values stay within valid range
     perturbed_image = torch.clamp(perturbed_image, 0, 1)
     return perturbed_image
 

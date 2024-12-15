@@ -75,28 +75,21 @@ class VAE(pl.LightningModule):
 
         std = torch.exp(log_std)
         z = sample_reparameterize(mean, std)
-        x_hat = self.decoder(z)  # Shape: [B, 16, H, W]
+        x_hat = self.decoder(z)
 
-        # Reshape predictions and targets for cross entropy
-        x_hat = x_hat.permute(0, 2, 3, 1)  # Shape: [B, H, W, 16]
-        x_hat = x_hat.reshape(-1, 16)  # Shape: [B*H*W, 16]
+        x_hat = x_hat.permute(0, 2, 3, 1)
+        x_hat = x_hat.reshape(-1, 16)
         
-        # Flatten the target images
-        target = imgs.squeeze(1).reshape(-1)  # Shape: [B*H*W]
+        target = imgs.squeeze(1).reshape(-1)
 
         L_rec_total = F.cross_entropy(x_hat, target.long(), reduction='none')
-        L_rec_per_image = L_rec_total.view(batch_size, -1).sum(dim=1)  # Sum over pixels per image
+        L_rec_per_image = L_rec_total.view(batch_size, -1).sum(dim=1)
 
-        # Calculate the regularization loss (sum per image)
-        L_reg_per_image = KLD(mean, log_std)  # Sum over latent dimensions
-
-        # Calculate the ELBO for each image in the batch
+        L_reg_per_image = KLD(mean, log_std)
         elbo_per_image = L_rec_per_image + L_reg_per_image
 
-        # Convert ELBO to BPD (calculates BPD for each image and averages internally)
         bpd = elbo_to_bpd(elbo_per_image, imgs.shape)
 
-        # Average reconstruction and regularization losses over the batch
         L_rec = L_rec_per_image.mean()
         L_reg = L_reg_per_image.mean()
 
@@ -120,23 +113,10 @@ class VAE(pl.LightningModule):
 
         z = torch.randn(batch_size, self.hparams.z_dim, device=self.device)
 
-        # Decode the samples
         x_samples = self.decoder(z)
         x_samples = torch.argmax(x_samples, dim=1)
 
-        # Convert the samples to 4-bit images
         x_samples = x_samples.view(batch_size, 1, 28, 28)
-        # x_samples = None
-        
-        # # Sample from the latent space
-        # z = torch.randn(batch_size, self.hparams.z_dim)
-
-        # # Decode the samples
-        # x_samples = self.decoder(z)
-        # x_samples = torch.argmax(x_samples, dim=1)
-
-        # # Convert the samples to 4-bit images
-        # x_samples = x_samples.view(batch_size, 1, 28, 28)
 
         #######################
         # END OF YOUR CODE    #
