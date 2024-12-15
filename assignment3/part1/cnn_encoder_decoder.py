@@ -139,11 +139,8 @@ class CNNDecoder(nn.Module):
         #######################
         batch_size = z.shape[0]
         
-        # Project and reshape
         x = self.linear(z)
-        x = x.reshape(batch_size, -1, 4, 4)  # -1 will be 2*num_filters
-        
-        # Apply transposed convolutions
+        x = x.reshape(batch_size, -1, 4, 4)
         x = self.decoder(x)
         #######################
         # END OF YOUR CODE    #
