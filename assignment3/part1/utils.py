@@ -118,13 +118,13 @@ def visualize_manifold(decoder, grid_size=20):
     #######################
     img_grid = None
     
-    z_values = torch.linspace(0.5 / grid_size, 1.5 - 0.5 / grid_size, grid_size)
-    z_values = torch.erfinv(2 * z_values - 1) * np.sqrt(2)
+    z_values = torch.linspace(0.5 / grid_size, 1 - 0.5 / grid_size, grid_size)
+    z_values = torch.distributions.Normal(0, 1).icdf(z_values)
     z_values = torch.meshgrid(z_values, z_values)
     z_values = torch.stack(z_values, dim=-1).reshape(-1, 2)
 
     img_grid = decoder(z_values)
-    img_grid = torch.sigmoid(img_grid)
+    img_grid = torch.softmax(img_grid, dim=1)
     img_grid = make_grid(img_grid, nrow=grid_size)
 
     #######################
